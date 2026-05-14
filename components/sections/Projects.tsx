@@ -13,6 +13,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { projects, projectsTechChips } from "@/lib/data";
 import type { ProjectItem } from "@/lib/types";
 import { PillChip } from "@/components/ui/PillChip";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export function Projects() {
   const [selected, setSelected] = useState<ProjectItem | null>(null);
@@ -21,18 +22,34 @@ export function Projects() {
   return (
     <div className="bg-bg-main pb-24 pt-8">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="mb-3 text-[11px] font-medium uppercase tracking-wider text-text-muted">
-          Tech stack
-        </p>
-        <div className="flex gap-2 overflow-x-auto pb-6">
-          {projectsTechChips.map((t) => (
-            <PillChip key={t} label={t} />
-          ))}
-        </div>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+          variants={staggerContainer}
+        >
+          <motion.p
+            variants={staggerItem}
+            className="mb-3 text-[11px] font-medium uppercase tracking-wider text-text-muted"
+          >
+            Tech stack
+          </motion.p>
+          <motion.div
+            variants={staggerItem}
+            className="flex gap-2 overflow-x-auto pb-6"
+          >
+            {projectsTechChips.map((t) => (
+              <PillChip key={t} label={t} />
+            ))}
+          </motion.div>
 
-        <h2 className="text-3xl font-bold text-white md:text-[32px]">
-          Featured Projects
-        </h2>
+          <motion.h2
+            variants={staggerItem}
+            className="text-3xl font-bold text-white md:text-[32px]"
+          >
+            Featured Projects
+          </motion.h2>
+        </motion.div>
 
         <div className="relative mt-10">
           <button
@@ -77,21 +94,21 @@ export function Projects() {
                       setSelected(p);
                     }
                   }}
-                  className="project-card group relative w-full cursor-pointer overflow-hidden rounded-[14px] border border-[var(--border-default)] bg-bg-card text-left transition hover:border-[var(--border-hover)]"
+                  className="project-card group relative w-full cursor-pointer overflow-hidden rounded-[14px] border border-[var(--border-default)] bg-bg-card text-left shadow-none transition-[border-color,box-shadow,transform] duration-300 hover:border-[var(--border-hover)] hover:shadow-glow-purple"
                 >
                   <div className="relative aspect-[16/10] w-full overflow-hidden">
                     <Image
                       src={p.image}
                       alt={p.title}
                       fill
-                      className="object-cover transition duration-300 group-hover:scale-[1.02]"
+                      className="object-cover transition duration-300 group-hover:scale-[1.03]"
                       sizes="(max-width:768px) 100vw, 33vw"
                     />
-                    <span className="absolute left-3 top-3 rounded-full bg-black/60 px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-white/90 backdrop-blur-sm">
+                    <span className="absolute left-3 top-3 z-[2] rounded-full bg-black/60 px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-white/90 backdrop-blur-sm">
                       {p.category}
                     </span>
-                    <div className="overlay">
-                      <span className="rounded-full bg-[var(--purple)] px-5 py-2 text-sm font-medium text-white">
+                    <div className="overlay z-[3]">
+                      <span className="overlay-cta rounded-full bg-[var(--purple)] px-5 py-2 text-sm font-medium text-white shadow-glow-purple">
                         VIEW PROJECT →
                       </span>
                     </div>
@@ -120,10 +137,13 @@ export function Projects() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4, ease: [0.25, 0, 0, 1] }}
+              transition={{ duration: 0.42 }}
               className="overflow-hidden"
             >
-              <div className="mt-10 space-y-8 rounded-[14px] border border-[var(--border-default)] bg-bg-card p-6">
+              <motion.div
+                layout
+                className="mt-10 space-y-8 rounded-[14px] border border-[var(--border-default)] bg-[rgba(255,255,255,0.03)] p-6 backdrop-blur-[8px]"
+              >
                 <div className="grid gap-4 md:grid-cols-3">
                   <DetailCard
                     title="PROBLEM"
@@ -160,8 +180,21 @@ export function Projects() {
                     <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-white">
                       Visual overview
                     </p>
-                    <div className="overflow-hidden rounded-xl border border-[var(--border-default)] bg-black/40 p-3">
-                      <div className="group/prev relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-white/10">
+                    <div className="overflow-hidden rounded-xl border border-[var(--border-default)] bg-[#0c0e14] p-3">
+                      <div className="overflow-hidden rounded-t-lg border border-white/10 border-b-0 bg-[#1a1d24] px-3 py-2">
+                        <div className="flex items-center gap-2">
+                          <span className="flex gap-1.5" aria-hidden>
+                            <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+                            <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+                            <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+                          </span>
+                          <div className="ml-2 flex-1 rounded-md bg-black/40 px-3 py-1 text-center text-[10px] text-white/50">
+                            {selected.title.toLowerCase().replace(/\s+/g, "")}
+                            .com
+                          </div>
+                        </div>
+                      </div>
+                      <div className="group/prev relative aspect-[16/9] w-full overflow-hidden rounded-b-lg border border-t-0 border-white/10 bg-black/40">
                         <Image
                           src={selected.visualOverviewImage}
                           alt={`${selected.title} preview`}
@@ -190,7 +223,7 @@ export function Projects() {
                     Live Site →
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

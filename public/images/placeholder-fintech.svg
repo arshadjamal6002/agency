@@ -1,4 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
-  <rect width="800" height="500" fill="#0f172a"/>
-  <text x="400" y="260" text-anchor="middle" fill="#38bdf8" font-family="system-ui" font-size="22" font-weight="700">Fintech  preview</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#0b1220"/>
+  <rect x="24" y="28" width="752" height="448" rx="12" fill="#0f172a" stroke="rgba(59,130,246,0.2)" stroke-width="1"/>
+  <rect x="24" y="28" width="752" height="36" rx="12" fill="#111c2e"/>
+  <rect x="24" y="52" width="752" height="12" fill="#111c2e"/>
+  <circle cx="44" cy="46" r="5" fill="#ff5f57"/>
+  <circle cx="62" cy="46" r="5" fill="#febc2e"/>
+  <circle cx="80" cy="46" r="5" fill="#28c840"/>
+  <rect x="110" y="40" width="380" height="14" rx="7" fill="rgba(255,255,255,0.06)"/>
+  <text x="130" y="51" fill="rgba(148,197,255,0.5)" font-family="system-ui,sans-serif" font-size="9">app.remitunion.com</text>
+  <!-- Dashboard body -->
+  <rect x="36" y="76" width="180" height="388" rx="8" fill="#0c1628"/>
+  <rect x="52" y="96" width="148" height="10" rx="3" fill="#1e3a5f"/>
+  <rect x="52" y="118" width="120" height="8" rx="2" fill="#1e293b"/>
+  <rect x="52" y="140" width="148" height="36" rx="6" fill="#132337"/>
+  <rect x="52" y="188" width="148" height="36" rx="6" fill="#132337"/>
+  <rect x="52" y="236" width="148" height="36" rx="6" fill="#132337"/>
+  <!-- Main card -->
+  <rect x="232" y="96" width="520" height="160" rx="12" fill="#132337" stroke="rgba(59,130,246,0.25)"/>
+  <text x="256" y="132" fill="#e2e8f0" font-family="system-ui,sans-serif" font-size="16" font-weight="700">Send money home</text>
+  <text x="256" y="158" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="11">Fast, secure transfers · Mobile-first</text>
+  <rect x="256" y="180" width="140" height="40" rx="20" fill="#2563eb"/>
+  <text x="326" y="205" fill="#fff" font-family="system-ui,sans-serif" font-size="12" font-weight="600" text-anchor="middle">Send money</text>
+  <rect x="232" y="280" width="250" height="120" rx="10" fill="#0f1a2e"/>
+  <text x="252" y="312" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="10">KYC progress</text>
+  <rect x="252" y="322" width="200" height="8" rx="4" fill="#1e293b"/>
+  <rect x="252" y="322" width="120" height="8" rx="4" fill="#3b82f6"/>
+  <text x="252" y="360" fill="#64748b" font-family="system-ui,sans-serif" font-size="9">Verify ID to unlock higher limits</text>
+  <rect x="500" y="280" width="252" height="120" rx="10" fill="#0f1a2e"/>
+  <path d="M520 320 L580 360 L640 300" stroke="#22c55e" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="520" y="388" fill="#94a3b8" font-family="system-ui,sans-serif" font-size="10">This month</text>
 </svg>

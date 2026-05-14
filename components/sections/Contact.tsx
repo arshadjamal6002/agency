@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { GradientText } from "@/components/ui/GradientText";
 import { siteConfig } from "@/lib/data";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "";
 const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
@@ -81,12 +82,15 @@ export function Contact() {
         </p>
       </div>
 
-      <div className="mx-auto mt-12 grid max-w-6xl gap-5 px-6 md:grid-cols-3">
+      <motion.div
+        className="mx-auto mt-12 grid max-w-6xl gap-5 px-6 md:grid-cols-3"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+      >
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
+          variants={staggerItem}
           className="contact-card flex flex-col rounded-[14px] border border-[var(--border-default)] bg-bg-card p-6"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[rgba(37,211,102,0.15)] text-green-wa">
@@ -114,10 +118,7 @@ export function Contact() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.12 }}
-          viewport={{ once: true, amount: 0.15 }}
+          variants={staggerItem}
           className="contact-card flex flex-col rounded-[14px] border border-[var(--border-default)] bg-bg-card p-6"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[rgba(59,130,246,0.15)] text-brandblue">
@@ -145,10 +146,7 @@ export function Contact() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.24 }}
-          viewport={{ once: true, amount: 0.15 }}
+          variants={staggerItem}
           className="contact-card flex flex-col rounded-[14px] border border-[var(--border-default)] bg-bg-card p-6"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[rgba(108,71,255,0.15)] text-purple-light">
@@ -210,7 +208,7 @@ export function Contact() {
             )}
           </form>
         </motion.div>
-      </div>
+      </motion.div>
 
       <p className="mx-auto mt-8 max-w-3xl px-6 text-center text-[12px] text-text-muted">
         Response time: Within 24 hours · Location: Available Worldwide · Email:{" "}

@@ -6,15 +6,30 @@ function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3);
 }
 
+function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function useCountUp(target: number, duration = 1200) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
   const rafRef = useRef<number | null>(null);
 
+  const runInstant = useCallback(() => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    setCount(target);
+  }, [target]);
+
   const start = useCallback(() => {
     if (startedRef.current) return;
     startedRef.current = true;
+    if (prefersReducedMotion()) {
+      setCount(target);
+      return;
+    }
     const startTime = performance.now();
 
     const tick = (now: number) => {
@@ -38,12 +53,19 @@ export function useCountUp(target: number, duration = 1200) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            start();
+          if (!entry.isIntersecting) return;
+          if (prefersReducedMotion()) {
+            runInstant();
+            return;
           }
+          start();
         });
       },
-      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+      {
+        root: null,
+        rootMargin: "0px 0px -12% 0px",
+        threshold: [0, 0.05, 0.1, 0.15],
+      }
     );
 
     observer.observe(el);
@@ -51,7 +73,7 @@ export function useCountUp(target: number, duration = 1200) {
       observer.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [start]);
+  }, [start, runInstant]);
 
   return { count, ref };
 }

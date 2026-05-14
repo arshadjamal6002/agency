@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144">
-  <circle cx="72" cy="72" r="72" fill="#1f1f2e"/>
-  <text x="72" y="82" text-anchor="middle" fill="#a78bfa" font-family="system-ui" font-size="36" font-weight="700">FY</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160" fill="none">
+  <defs>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6c47ff"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <circle cx="80" cy="80" r="78" fill="#12121c" stroke="url(#ring)" stroke-width="4"/>
+  <ellipse cx="80" cy="68" rx="36" ry="42" fill="#1a1a28"/>
+  <path d="M44 115 Q80 88 116 115 L116 130 Q80 108 44 130 Z" fill="#1a1a28"/>
+  <ellipse cx="68" cy="62" rx="8" ry="6" fill="#000" opacity="0.2"/>
 </svg>

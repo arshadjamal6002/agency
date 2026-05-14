@@ -117,6 +117,81 @@ body {
   }
 }
 
+/* Hero portrait — layered glow (readable vs flat SVG) */
+.hero-glow-core {
+  position: absolute;
+  inset: -38%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 70% 65% at 50% 52%,
+    rgba(108, 71, 255, 0.62) 0%,
+    rgba(108, 71, 255, 0.18) 42%,
+    transparent 72%
+  );
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.hero-glow-halo {
+  position: absolute;
+  inset: -58%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 70% at 48% 48%,
+    rgba(99, 102, 241, 0.35) 0%,
+    rgba(59, 130, 246, 0.12) 38%,
+    transparent 62%
+  );
+  filter: blur(48px);
+  opacity: 0.85;
+  animation: glowPulse 4.2s ease-in-out infinite;
+  animation-delay: -0.8s;
+}
+
+@keyframes heroOrbDrift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate(18px, -24px) scale(1.06);
+    opacity: 0.42;
+  }
+}
+
+@keyframes heroOrbDrift2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.22;
+  }
+  50% {
+    transform: translate(-22px, 16px) scale(1.05);
+    opacity: 0.36;
+  }
+}
+
+.hero-ambient {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: heroOrbDrift 14s ease-in-out infinite;
+}
+
+.hero-ambient-orb--2 {
+  animation: heroOrbDrift2 18s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
 .marquee-track {
   display: flex;
   width: max-content;
@@ -143,22 +218,32 @@ body {
   transition: opacity 0.3s, transform 0.3s;
 }
 
+.swiper-slide:not(.swiper-slide-active) .project-card:hover {
+  opacity: 1;
+  transform: scale(0.97);
+}
+
 .project-card .overlay {
   position: absolute;
   inset: 0;
   background: rgba(6, 6, 18, 0.78);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.project-card:hover .overlay {
+.project-card:hover .overlay,
+.project-card:focus-visible .overlay {
   opacity: 1;
 }
 
-.project-card .overlay button {
+.project-card .overlay .overlay-cta {
+  pointer-events: auto;
   transform: scale(0.88);
   opacity: 0;
   transition:
@@ -166,9 +251,23 @@ body {
     opacity 0.25s ease 0.05s;
 }
 
-.project-card:hover .overlay button {
+.project-card:hover .overlay .overlay-cta,
+.project-card:focus-visible .overlay .overlay-cta {
   transform: scale(1);
   opacity: 1;
+}
+
+.video-card {
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    transform 0.25s;
+}
+
+.video-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--glow-purple);
+  transform: translateY(-3px);
 }
 
 .video-card:hover .video-thumb {
@@ -180,7 +279,20 @@ body {
   background: rgba(255, 255, 255, 0.25);
 }
 
-.gallery-item:hover img {
+.gallery-item {
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s,
+    transform 0.25s;
+}
+
+.gallery-item:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--glow-purple);
+  transform: translateY(-2px);
+}
+
+.gallery-item:hover .gallery-inner {
   transform: scale(1.04);
 }
 
@@ -247,5 +359,17 @@ body {
 
   .phone-float {
     animation: none;
+  }
+
+  .hero-ambient-orb,
+  .hero-ambient-orb--2 {
+    animation: none;
+    opacity: 0.25;
+  }
+
+  .hero-glow-core,
+  .hero-glow-halo {
+    animation: none;
+    opacity: 0.75;
   }
 }

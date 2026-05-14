@@ -5,39 +5,36 @@ import Image from "next/image";
 import Link from "next/link";
 import { Play } from "lucide-react";
 import { videoAds } from "@/lib/data";
-
-const item = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0 },
-};
+import { fadeUp, staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export function VideoAds() {
   return (
     <div className="bg-bg-main py-24">
-      <div className="mx-auto max-w-6xl px-6 text-center">
+      <motion.div
+        className="mx-auto max-w-6xl px-6 text-center"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={viewportOnce}
+      >
         <h2 className="text-3xl font-bold md:text-4xl">
           <span className="text-white">Promotional</span>{" "}
           <span className="text-[var(--cyan)]">Video Ads</span>
         </h2>
-      </div>
+      </motion.div>
 
       <motion.div
         className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-6 px-6 md:grid-cols-3"
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={{
-          hidden: {},
-          show: {
-            transition: { staggerChildren: 0.1 },
-          },
-        }}
+        viewport={viewportOnce}
+        variants={staggerContainer}
       >
         {videoAds.map((v) => (
           <motion.a
             key={v.id}
             href={v.href}
-            variants={item}
+            variants={staggerItem}
             className="video-card group block overflow-hidden rounded-[14px] border border-[var(--border-default)] bg-bg-card transition hover:border-[var(--border-hover)]"
           >
             <div className="relative aspect-video w-full overflow-hidden">

@@ -20,6 +20,13 @@ export interface NavItem {
   label: string;
 }
 
+export interface BrandLogoItem {
+  id: string;
+  name: string;
+  /** Short initials shown in the marquee tile */
+  abbr: string;
+}
+
 export interface ServiceItem {
   num: string;
   icon: IconName;
@@ -27,6 +34,14 @@ export interface ServiceItem {
   title: string;
   desc: string;
   chips: string[];
+  /** Small uppercase label, top-right of the card */
+  kicker?: string;
+  /** Muted one-line scope under the title */
+  meta?: string;
+  /** Short proof line below the chip row */
+  outcome?: string;
+  /** Use slightly smaller title for long headings */
+  titleCompact?: boolean;
 }
 
 export interface WebsiteFeature {
@@ -65,10 +80,21 @@ export interface VideoItem {
   href?: string;
 }
 
+export type ContentGalleryTheme =
+  | "money"
+  | "lifestyle"
+  | "tips"
+  | "promoPortrait"
+  | "moneyBlue"
+  | "dualPhone"
+  | "darkLaunch"
+  | "gradientBrand";
+
 export interface ContentGalleryItem {
   id: string;
   title: string;
   variant: 0 | 1 | 2 | 3;
+  theme: ContentGalleryTheme;
 }
 
 export interface TestimonialItem {

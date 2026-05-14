@@ -22,10 +22,10 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-[100] border-b border-transparent transition-[background,backdrop-filter,border-color] duration-300",
+        "sticky top-0 z-[100] border-b border-transparent transition-[background,backdrop-filter,border-color,box-shadow] duration-300",
         scrolled
-          ? "border-[rgba(255,255,255,0.06)] bg-[rgba(9,9,15,0.85)] backdrop-blur-[14px]"
-          : "bg-transparent"
+          ? "border-[rgba(255,255,255,0.06)] bg-[rgba(9,9,15,0.85)] shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-[14px] [backdrop-filter:blur(14px)] [-webkit-backdrop-filter:blur(14px)] [will-change:backdrop-filter]"
+          : "bg-transparent [will-change:auto]"
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -43,10 +43,10 @@ export function Navbar() {
               key={item.id}
               href={`#${item.id}`}
               className={cn(
-                "relative text-[13px] font-medium transition-colors",
+                "relative text-[13px] font-medium transition-colors after:absolute after:bottom-[-6px] after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-purple-light after:transition-all after:duration-300 hover:text-white hover:after:w-full",
                 activeId === item.id
-                  ? "text-purple-light after:absolute after:bottom-[-6px] after:left-0 after:h-0.5 after:w-full after:bg-purple-light"
-                  : "text-text-secondary hover:text-white"
+                  ? "text-purple-light after:w-full"
+                  : "text-text-secondary"
               )}
             >
               {item.label}

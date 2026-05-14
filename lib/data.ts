@@ -1,5 +1,7 @@
 import type {
+  BrandLogoItem,
   ContentGalleryItem,
+  ContentGalleryTheme,
   MobileFeature,
   NavItem,
   ProjectItem,
@@ -13,6 +15,8 @@ export const siteConfig = {
   name: "Fazilyyy.",
   ownerName: "Fazil Yousafzai",
   tagline: "Full-Stack Dev & Digital Creator",
+  aboutBio:
+    "I build websites, apps, promo videos & run social media — everything your brand needs to grow online.",
   email:
     process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "faziliyysami@gmail.com",
   fiverrUrl:
@@ -44,15 +48,15 @@ export const sectionIds = [
   "contact",
 ] as const;
 
-export const brandLogos = [
-  "Remit Union",
-  "SMRTALGO",
-  "DukaNext",
-  "NDUpFront",
-  "Braalia",
-  "Clarity",
-  "Remit Union",
-  "SMRTALGO",
+export const brandLogos: BrandLogoItem[] = [
+  { id: "remit", name: "Remit Union", abbr: "RU" },
+  { id: "smrt", name: "SMRTALGO", abbr: "SM" },
+  { id: "duka", name: "DukaNext", abbr: "DN" },
+  { id: "ndu", name: "NDUpFront", abbr: "ND" },
+  { id: "braalia", name: "Braalia", abbr: "BR" },
+  { id: "clarity", name: "Clarity", abbr: "CL" },
+  { id: "remit2", name: "Remit Union", abbr: "RU" },
+  { id: "smrt2", name: "SMRTALGO", abbr: "SM" },
 ];
 
 export const services: ServiceItem[] = [
@@ -62,7 +66,10 @@ export const services: ServiceItem[] = [
     iconBg: "#6c47ff",
     title: "Website Development",
     desc: "High-performance, conversion-focused websites and landing pages built for results.",
-    chips: ["React", "Next.js", "Shopify", "Webflow"],
+    chips: ["Next.js", "React", "Node.js", "Webflow"],
+    kicker: "POPULAR",
+    meta: "Landing pages • SaaS • e-commerce",
+    outcome: "Shipped for conversion, speed, and SEO-ready structure.",
   },
   {
     num: "02",
@@ -70,7 +77,10 @@ export const services: ServiceItem[] = [
     iconBg: "#3b82f6",
     title: "Mobile App Development",
     desc: "Native-feel iOS and Android apps built with React Native, Expo & Flutter.",
-    chips: ["React Native", "Flutter", "Expo"],
+    chips: ["React Native", "Expo", "iOS", "Android"],
+    kicker: "TRENDING",
+    meta: "Cross-platform • App Store ready",
+    outcome: "End-to-end builds with scalable backends.",
   },
   {
     num: "03",
@@ -78,23 +88,33 @@ export const services: ServiceItem[] = [
     iconBg: "#f59e0b",
     title: "UI/UX Design",
     desc: "Results-driven design, incredible performance, and pixel-perfect builds.",
-    chips: ["Figma", "Illustrative", "Brand"],
+    chips: ["Figma", "Prototyping", "User research", "Design systems"],
+    kicker: "OPTIONAL",
+    meta: "Product UX • Design systems • Handoff",
+    outcome: "Designs engineered for dev-ready delivery.",
   },
   {
     num: "04",
     icon: "PlayCircle",
-    iconBg: "#6c47ff",
+    iconBg: "#ec4899",
     title: "Promo Video Ads",
     desc: "Scroll-stopping video ads that convert. Professional editing, motion design.",
-    chips: ["After Effects", "Premiere", "CapCut"],
+    chips: ["After Effects", "Premiere", "CapCut", "Motion"],
+    kicker: "HIGH IMPACT",
+    meta: "Ads • Reels • Launch campaigns",
+    outcome: "Creative that stops the scroll and drives clicks.",
   },
   {
     num: "05",
     icon: "BarChart2",
-    iconBg: "#ec4899",
+    iconBg: "#3b82f6",
     title: "Social Media Management & Content Creation",
     desc: "Focused on brand storytelling. Every post is intentional, every goal is brand awareness.",
-    chips: ["Instagram", "TikTok", "LinkedIn"],
+    chips: ["Instagram", "TikTok", "LinkedIn", "Content"],
+    kicker: "RETAINER",
+    meta: "Strategy • Content • Growth",
+    outcome: "Consistent brand presence with measurable reach.",
+    titleCompact: true,
   },
 ];
 
@@ -283,11 +303,23 @@ export const videoAds: VideoItem[] = [
   },
 ];
 
+const GALLERY_THEMES: ContentGalleryTheme[] = [
+  "money",
+  "lifestyle",
+  "tips",
+  "promoPortrait",
+  "moneyBlue",
+  "dualPhone",
+  "darkLaunch",
+  "gradientBrand",
+];
+
 const galleryBase = (prefix: string): ContentGalleryItem[] =>
   Array.from({ length: 8 }, (_, i) => ({
     id: `${prefix}-${i}`,
     title: `Creative ${i + 1}`,
     variant: (i % 4) as 0 | 1 | 2 | 3,
+    theme: GALLERY_THEMES[i]!,
   }));
 
 export const contentTabs: {

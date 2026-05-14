@@ -18,7 +18,16 @@ export function Hero() {
         backgroundSize: "32px 32px",
       }}
     >
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-8">
+      <div className="hero-ambient" aria-hidden>
+        <div
+          className="hero-ambient-orb -left-[15%] top-[10%] h-[min(55vw,420px)] w-[min(55vw,420px)] bg-purple/25"
+        />
+        <div
+          className="hero-ambient-orb hero-ambient-orb--2 bottom-[5%] right-[-10%] h-[min(45vw,360px)] w-[min(45vw,360px)] bg-brandblue/20"
+        />
+      </div>
+
+      <div className="relative z-[1] mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-8">
         <div className="flex flex-col justify-center">
           <motion.h1
             className="text-4xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-[52px]"
@@ -77,35 +86,28 @@ export function Hero() {
         </div>
 
         <motion.div
-          className="relative flex min-h-[420px] items-end justify-end lg:min-h-[560px]"
+          className="relative z-[1] flex min-h-[420px] items-end justify-end lg:min-h-[560px]"
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.3, ease }}
         >
-          <div
-            className="pointer-events-none absolute inset-[-30%] z-0"
-            style={{
-              background:
-                "radial-gradient(ellipse at center, rgba(108,71,255,0.45) 0%, transparent 65%)",
-              animation: "glowPulse 3s ease-in-out infinite",
-            }}
-            aria-hidden
-          />
-          <div className="relative z-10 w-full max-w-md lg:max-w-none">
+          <div className="hero-glow-halo" aria-hidden />
+          <div className="hero-glow-core" aria-hidden />
+          <div className="relative z-10 w-full max-w-[min(100%,420px)] lg:max-w-none lg:flex lg:min-h-[min(85vh,720px)] lg:items-end lg:justify-end">
             <Image
               src="/images/hero-portrait.svg"
               alt="Fazil Yousafzai — portrait placeholder"
               width={600}
-              height={800}
+              height={900}
               priority
-              className="h-auto w-full rounded-none object-contain object-bottom"
+              className="relative z-[1] h-auto max-h-[min(85vh,720px)] w-full rounded-none object-contain object-bottom drop-shadow-[0_0_48px_rgba(108,71,255,0.2)]"
             />
           </div>
         </motion.div>
       </div>
 
       <motion.div
-        className="mx-auto mt-12 flex max-w-6xl items-end justify-between px-6 pb-8 text-text-muted"
+        className="relative z-[1] mx-auto mt-12 flex max-w-6xl items-end justify-between px-6 pb-8 text-text-muted"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.9, ease }}

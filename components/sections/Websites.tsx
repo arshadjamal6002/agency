@@ -8,8 +8,7 @@ import { GradientText } from "@/components/ui/GradientText";
 import { websiteFeatures, websiteTechChips } from "@/lib/data";
 import { IconFor } from "@/lib/icons";
 import { ArrowRight } from "lucide-react";
-
-const ease = [0.25, 0, 0, 1] as const;
+import { slideInLeft, staggerItem, viewportOnce } from "@/lib/motion";
 
 export function Websites() {
   return (
@@ -17,10 +16,10 @@ export function Websites() {
       <SectionLabel label="WEBSITE DEVELOPMENT" />
       <div className="mx-auto grid max-w-6xl gap-10 px-6 lg:grid-cols-2 lg:gap-12">
         <motion.div
-          initial={{ opacity: 0, x: -28 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease }}
-          viewport={{ once: true, amount: 0.15 }}
+          variants={slideInLeft}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
         >
           <h2 className="text-3xl font-bold leading-tight text-white md:text-4xl">
             Websites That Work{" "}
@@ -43,20 +42,24 @@ export function Websites() {
 
         <motion.div
           className="grid grid-cols-2 gap-3"
-          initial={{ opacity: 0, x: 28 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease }}
-          viewport={{ once: true, amount: 0.15 }}
+          variants={{
+            hidden: { opacity: 0, x: 28 },
+            show: {
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.55, staggerChildren: 0.08, delayChildren: 0.04 },
+            },
+          }}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
         >
-          {websiteFeatures.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: i * 0.06, ease }}
-              viewport={{ once: true, amount: 0.1 }}
-              className="rounded-[14px] border border-[var(--border-default)] bg-bg-card p-4"
-            >
+            {websiteFeatures.map((f) => (
+              <motion.div
+                key={f.title}
+                variants={staggerItem}
+                className="rounded-[14px] border border-[var(--border-default)] bg-[rgba(255,255,255,0.03)] p-4 backdrop-blur-[6px] transition duration-300 hover:border-[var(--border-hover)] hover:shadow-glow-purple"
+              >
               <div className="flex items-start gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[rgba(108,71,255,0.2)] text-purple-light">
                   <IconFor name={f.icon} className="h-4 w-4" />

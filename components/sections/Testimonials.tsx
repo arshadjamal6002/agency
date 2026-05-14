@@ -6,34 +6,43 @@ import { StatBlock } from "@/components/ui/StatBlock";
 import { testimonials } from "@/lib/data";
 import { cn } from "@/lib/cn";
 import { Star } from "lucide-react";
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
 
 export function Testimonials() {
   return (
     <section className="bg-bg-main py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-2 gap-6 border-b border-[var(--border-default)] pb-10 md:grid-cols-4">
-          <div className="text-center">
+        <motion.div
+          className="grid grid-cols-2 gap-6 border-b border-[var(--border-default)] pb-10 md:grid-cols-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          <motion.div variants={staggerItem} className="text-center">
             <p className="text-2xl font-bold text-white">4.8 ★</p>
             <p className="mt-1 text-[13px] text-text-muted">Avg Rating</p>
-          </div>
-          <StatBlock value={408} suffix="+" label="Portfolio" />
-          <StatBlock value={880} suffix="+" label="Orders" />
-          <StatBlock value={100} suffix="%" label="Satisfaction" />
-        </div>
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <StatBlock value={408} suffix="+" label="Portfolio" />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <StatBlock value={880} suffix="+" label="Orders" />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <StatBlock value={100} suffix="%" label="Satisfaction" />
+          </motion.div>
+        </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: i < 3 ? i * 0.08 : 0.15 + (i - 3) * 0.08,
-                ease: [0.25, 0, 0, 1],
-              }}
-              viewport={{ once: true, amount: 0.1 }}
-            >
+        <motion.div
+          className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          {testimonials.map((t) => (
+            <motion.div key={t.id} variants={staggerItem}>
               <GlowCard className="flex h-full flex-col">
                 <div className="flex items-center justify-between">
                   <span
@@ -77,7 +86,7 @@ export function Testimonials() {
               </GlowCard>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

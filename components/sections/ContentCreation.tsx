@@ -7,13 +7,8 @@ import { GradientText } from "@/components/ui/GradientText";
 import { StatBlock } from "@/components/ui/StatBlock";
 import { contentTabs } from "@/lib/data";
 import { cn } from "@/lib/cn";
-
-const variants = {
-  0: "from-violet-600/50 to-blue-700/40",
-  1: "from-pink-600/50 to-purple-700/40",
-  2: "from-cyan-600/40 to-slate-800/60",
-  3: "from-amber-600/40 to-rose-700/40",
-} as const;
+import { staggerContainer, staggerItem, viewportOnce } from "@/lib/motion";
+import { GalleryTileArt } from "@/components/ui/GalleryTileArt";
 
 export function ContentCreation() {
   const [activeId, setActiveId] = useState(contentTabs[0].id);
@@ -27,7 +22,13 @@ export function ContentCreation() {
       <SectionLabel label="CONTENT STUDIO" />
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-xl">
+          <motion.div
+            className="max-w-xl"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportOnce}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="text-3xl font-bold leading-tight text-white md:text-4xl">
               Branding &<br />
               <GradientText variant="pink">Content Creation</GradientText>
@@ -54,20 +55,32 @@ export function ContentCreation() {
                 </span>
               ))}
             </div>
-          </div>
-          <div className="grid w-full max-w-md grid-cols-2 gap-4">
-            <StatBlock value={50} suffix="+" label="Brands Elevated" />
-            <StatBlock value={500} suffix="+" label="Posts Created" />
-            <div className="text-center md:text-left">
+          </motion.div>
+          <motion.div
+            className="grid w-full max-w-md grid-cols-2 gap-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={viewportOnce}
+          >
+            <motion.div variants={staggerItem}>
+              <StatBlock value={50} suffix="+" label="Brands Elevated" />
+            </motion.div>
+            <motion.div variants={staggerItem}>
+              <StatBlock value={500} suffix="+" label="Posts Created" />
+            </motion.div>
+            <motion.div variants={staggerItem} className="text-center md:text-left">
               <div className="text-[28px] font-bold leading-none text-text-primary">
                 3M+
               </div>
               <div className="mt-1 text-[13px] text-text-muted">
-                Reach Generated
+                Views Generated
               </div>
-            </div>
-            <StatBlock value={98} suffix="%" label="Client Retention" />
-          </div>
+            </motion.div>
+            <motion.div variants={staggerItem}>
+              <StatBlock value={98} suffix="%" label="Client Retention" />
+            </motion.div>
+          </motion.div>
         </div>
 
         <div className="mt-10 flex flex-wrap gap-2 overflow-x-auto border-b border-[var(--border-default)] pb-4">
@@ -95,27 +108,29 @@ export function ContentCreation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3 }}
-            className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4"
+            className="mt-8"
           >
-            {active.items.map((item) => (
-              <div
-                key={item.id}
-                className="gallery-item group relative aspect-square cursor-pointer overflow-hidden rounded-xl border border-[var(--border-default)]"
-              >
-                <div
-                  className={cn(
-                    "absolute inset-0 bg-gradient-to-br transition duration-300 group-hover:scale-105",
-                    variants[item.variant]
-                  )}
-                />
-                <div className="gallery-overlay absolute inset-0 z-10 flex items-end bg-black/50 p-3 opacity-0 transition-opacity duration-300">
-                  <p className="text-xs font-medium text-white">{item.title}</p>
-                </div>
-                <p className="absolute inset-0 z-[5] flex items-center justify-center p-4 text-center text-sm font-medium text-white/90">
-                  {item.title}
-                </p>
-              </div>
-            ))}
+            <motion.div
+              className="grid grid-cols-2 gap-4 md:grid-cols-4"
+              variants={staggerContainer}
+              initial="hidden"
+              animate="show"
+            >
+              {active.items.map((item) => (
+                <motion.div
+                  key={item.id}
+                  variants={staggerItem}
+                  className="gallery-item group relative aspect-square cursor-pointer overflow-hidden rounded-xl border border-[var(--border-default)]"
+                >
+                  <div className="gallery-inner absolute inset-0 overflow-hidden rounded-xl">
+                    <GalleryTileArt theme={item.theme} />
+                  </div>
+                  <div className="gallery-overlay absolute inset-0 z-10 flex items-end bg-black/50 p-3 opacity-0 transition-opacity duration-300">
+                    <p className="text-xs font-medium text-white">{item.title}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </AnimatePresence>
 
