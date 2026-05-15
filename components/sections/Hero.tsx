@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
+import { siteConfig } from "@/lib/data";
 
 const ease = [0.25, 0, 0, 1] as const;
 
@@ -96,7 +97,7 @@ export function Hero() {
           <div className="relative z-10 w-full max-w-[min(100%,420px)] lg:max-w-none lg:flex lg:min-h-[min(85vh,720px)] lg:items-end lg:justify-end">
             <Image
               src="/images/hero-portrait.svg"
-              alt="Fazil Yousafzai — portrait placeholder"
+              alt={`${siteConfig.ownerName} — portrait placeholder`}
               width={600}
               height={900}
               priority

@@ -10,9 +10,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Fazilyyy — Full-Stack Developer & Digital Creator",
+  title: "Fazilyyy — AI Full-Stack Engineer at Ayvik AI & Essentient",
   description:
-    "Engineering digital excellence through code and design. Websites, apps, promo videos, and content — full-spectrum digital services.",
+    "Engineering digital excellence through code and design. AI full-stack product work across Ayvik AI and Essentient — intelligent, reliable web experiences.",
 };
 
 export default function RootLayout({

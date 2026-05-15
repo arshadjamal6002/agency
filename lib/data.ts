@@ -13,18 +13,19 @@ import type {
 
 export const siteConfig = {
   name: "Fazilyyy.",
-  ownerName: "Fazil Yousafzai",
-  tagline: "Full-Stack Dev & Digital Creator",
+  ownerName: "Arshad Jamal",
+  ownerMonogram: "AJ",
+  tagline: "AI Full-Stack Engineer at Ayvik AI and Essentient",
   aboutBio:
-    "I build websites, apps, promo videos & run social media — everything your brand needs to grow online.",
+    "I ship end-to-end AI-powered web products — from APIs and data layers to polished interfaces — across Ayvik AI and Essentient.",
   email:
-    process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "faziliyysami@gmail.com",
+    process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "arshad.jamal.co@gmail.com",
   fiverrUrl:
     process.env.NEXT_PUBLIC_FIVERR_URL ?? "https://www.fiverr.com/",
   calendlyUrl:
     process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/",
   whatsappNumber:
-    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "923001234567",
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "919534161220",
 };
 
 export const navItems: NavItem[] = [
@@ -375,7 +376,7 @@ export const testimonials: TestimonialItem[] = [
   {
     id: "t3",
     platform: "FIVERR",
-    text: "Faadly understood our vision and shipped beyond expectations. Highly recommended.",
+    text: "Arshad understood our vision and shipped beyond expectations. Highly recommended.",
     name: "shopbybitose",
     handle: "shopbybitose",
     service: "PROMO VIDEO",

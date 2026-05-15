@@ -31,20 +31,20 @@ export function Footer() {
         className="pointer-events-none absolute inset-0 flex items-center justify-center text-[220px] font-bold leading-none text-[var(--purple)] opacity-[0.08]"
         aria-hidden
       >
-        FY
+        {siteConfig.ownerMonogram}
       </div>
       <AnimatedSection className="relative mx-auto max-w-6xl px-6">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-3">
             <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--purple)] text-sm font-bold text-white">
-              FY
+              {siteConfig.ownerMonogram}
             </div>
             <h3 className="text-lg font-bold text-white">
               Let&apos;s Keep The Future Flowing
             </h3>
             <p className="text-sm text-text-secondary">
-              {siteConfig.ownerName} — Full Stack Dev & Mobile Developer.
-              Available Worldwide.
+              {siteConfig.ownerName} — {siteConfig.tagline}. Available
+              Worldwide.
             </p>
             <a
               href={`mailto:${siteConfig.email}`}
